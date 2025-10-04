@@ -2,9 +2,10 @@ import { useState } from 'react';
 import CharactersView from '../components/CharactersView';
 import InventoryView from '../components/InventoryView';
 import ProfileView from '../components/ProfileView';
+import QuestsView from '../components/QuestsView';
 import Icon from '../components/ui/icon';
 
-type View = 'characters' | 'inventory' | 'profile';
+type View = 'characters' | 'inventory' | 'quests' | 'profile';
 
 export default function Index() {
   const [currentView, setCurrentView] = useState<View>('characters');
@@ -41,6 +42,17 @@ export default function Index() {
                 Инвентарь
               </button>
               <button
+                onClick={() => setCurrentView('quests')}
+                className={`px-6 py-2.5 rounded-xl font-medium transition-all duration-300 ${
+                  currentView === 'quests'
+                    ? 'bg-gradient-to-r from-vierant to-mystic-purple text-white shadow-lg shadow-vierant/50'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                }`}
+              >
+                <Icon name="Scroll" className="inline mr-2" size={18} />
+                Квесты
+              </button>
+              <button
                 onClick={() => setCurrentView('profile')}
                 className={`px-6 py-2.5 rounded-xl font-medium transition-all duration-300 ${
                   currentView === 'profile'
@@ -59,6 +71,7 @@ export default function Index() {
       <div className="pt-24 pb-8">
         {currentView === 'characters' && <CharactersView />}
         {currentView === 'inventory' && <InventoryView />}
+        {currentView === 'quests' && <QuestsView />}
         {currentView === 'profile' && <ProfileView />}
       </div>
     </div>
